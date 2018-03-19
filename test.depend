@@ -26,3 +26,19 @@
 	"GLUT/glut.h"
 	"GL\glut.h"
 
+1521487120 source:c:\users\bipin\desktop\cg project\test\main.cpp
+	<iostream>
+	<unistd.h>
+	<time.h>
+	<math.h>
+	"GLUT/glut.h"
+	"GL\glut.h"
+
+1521127411 source:c:\users\bipin\desktop\cg project\test\refcode2.cpp
+	<iostream>
+	<unistd.h>
+	<time.h>
+	<math.h>
+	"GLUT/glut.h"
+	"GL\glut.h"
+
