@@ -198,7 +198,7 @@ void introduction() {
           1, 1, 1, title_fade, 840, 320, .1, .1, 1);
 
     print("Press N (next) to proceed",
-          1, 1, 1, intro_next_text_appear, 560, 10, .09, .09, 1);
+          1, 1, 1, intro_next_text_appear, 550, 30, .12, .12, 2);
 
 }
 
@@ -467,7 +467,7 @@ void update(int) {
     // Introduction
     if (SCENE_ID == 0) {
         if (title_fade < 1)
-            title_fade += .010;
+            title_fade += .008;
         else
             intro_next_text_appear = 1;
     }
