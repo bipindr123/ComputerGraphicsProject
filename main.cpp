@@ -10,13 +10,13 @@
 #include "GLUT/glut.h"
 #else
 
-#include <glut.h>
+#include<glut.h>
 
 #endif
 
 // Define the value of PI, upto 12 decimal places
 #define PI 3.141592653589
-int i=1,j=1, k=1, counter=1;
+int i=1,j=1, k=1, counter=1, shake = 1;
 // ID to detect which scene the story is in.
 int SCENE_ID = 0;
 
@@ -81,7 +81,7 @@ void deadtrees(int x, int y) {
 
 }
 
-void grass_a(int x, int y, int width, int height) {
+void grass(int x, int y, int width, int height) {
     i = x;
     for (j = 0; j < height; j++) {
         for (k = 0; k < width; k++) {
@@ -104,7 +104,7 @@ void grass_a(int x, int y, int width, int height) {
 }
 
 
-void circle_a(GLfloat x, GLfloat y, GLdouble radius) {
+void circle(GLfloat x, GLfloat y, GLdouble radius) {
     float x2, y2;
     float angle;
     glPointSize(2.0);
@@ -118,23 +118,23 @@ void circle_a(GLfloat x, GLfloat y, GLdouble radius) {
     glEnd();
 }
 
-void cloud_a(int x, int y, int r, int i) {
-    circle_a(x + i, y, r);
-    circle_a(x + i, y, r);
-    circle_a(x + 10 + i, y + 30, r - 10);
-    circle_a(x + 55 + i, y + 20, r + 10);
-    circle_a(x + 100 + i, y + 25, r - 5);
-    circle_a(x + 90 + i, y, r + 10);
-    circle_a(x + 120 + i, y + 15, r - 10);
+void cloud(int x, int y, int r, int i) {
+    circle(x + i, y, r);
+    circle(x + i, y, r);
+    circle(x + 10 + i, y + 30, r - 10);
+    circle(x + 55 + i, y + 20, r + 10);
+    circle(x + 100 + i, y + 25, r - 5);
+    circle(x + 90 + i, y, r + 10);
+    circle(x + 120 + i, y + 15, r - 10);
 }
 
 void aliveTrees(int x, int y) {
-    circle_a(x - 5, y + 100, 35);
-    /*circle_a(x - 5, y + 100, 35);*/
-    circle_a(x - 30, y + 120, 35);
-    circle_a(x - 8, y + 150, 35);
-    circle_a(x + 40, y + 100, 35);
-    circle_a(x + 35, y + 150, 35);
+    circle(x - 5, y + 100, 35);
+    /*circle(x - 5, y + 100, 35);*/
+    circle(x - 30, y + 120, 35);
+    circle(x - 8, y + 150, 35);
+    circle(x + 40, y + 100, 35);
+    circle(x + 35, y + 150, 35);
     glColor3ub(184, 134, 11);
     glBegin(GL_POLYGON);
     glVertex2i(x, y);
@@ -180,6 +180,7 @@ void print(char *string,
     glPointSize(1);
 }
 
+//scene 1 intro
 
 void introduction() {
 
@@ -201,6 +202,7 @@ void introduction() {
 
 }
 
+// scene
 void fullArmy() {
     glClear(GL_COLOR_BUFFER_BIT);
     glPointSize(5.0);
@@ -226,20 +228,19 @@ void fullArmy() {
 
     //sun
     glColor3ub(255, 242, 0);
-    circle_a(400, 600, 70.0);
+    circle(400, 600, 70.0);
 
-    //cloud_a
+    //cloud
     glColor3f(1.0, 1.0, 1.0);
-    cloud_a(800, 600, 30, -counter);
+    cloud(800, 600, 30, -counter);
     glColor3f(1.0, 1.0, 1.0);
-    cloud_a(100, 680, 30, counter);
+    cloud(100, 680, 30, counter);
 
 
-    std::cout<<" THIS IS COUNTER "<<counter<<"\n";
 
     // mountains
     glColor3ub(153, 68, 22);
-    circle_a(213.33, 491.5, 29.5);
+    circle(213.33, 491.5, 29.5);
     glBegin(GL_POLYGON);
     glVertex2f(0, 300);
     glVertex2f(183.33, 500);
@@ -248,7 +249,7 @@ void fullArmy() {
     glEnd();
 
 
-    circle_a(640.0, 491.5, 29.5);
+    circle(640.0, 491.5, 29.5);
     glBegin(GL_POLYGON);
     glVertex2f(426.67, 300);
     glVertex2f(610, 500);
@@ -257,7 +258,7 @@ void fullArmy() {
     glEnd();
 
 
-    circle_a(1066.66, 491.5, 29.5);
+    circle(1066.66, 491.5, 29.5);
     glBegin(GL_POLYGON);
     glVertex2f(853.33, 300);
     glVertex2f(1036.6, 500);
@@ -265,7 +266,7 @@ void fullArmy() {
     glVertex2f(1400, 300);
     glEnd();
 
-    //grass_a
+    //grass
     glColor3f(0, 0.2, 0);
     int j;
 
@@ -273,14 +274,17 @@ void fullArmy() {
     {
         for(i=80;i<1200;i=i+80)
         {
-            grass_a(i,j,1,1);
+            grass(i,j,1,1);
         }
     }
 
+    std::cout<<" \n SHAKE IS "<<shake<<"\n";
+
     for (j = 0; j < 5; ++j)
         for (i = 0; i < 40; i++) {
-            drawArmy(i * 30 - j * 10, j * 40 - 5 * j + 10, 10 - 0.1 * j, 232, 190, 123);
-            drawArmy(i * 30 - j * 10, j * 40 - 5 * j, 20 - 0.5 * j, 182, 190, 23);
+    
+            drawArmy(i * 30 - j * 10 + shake*5, j * 40 - 5 * j + 10, 10 - 0.1 * j, 232, 190, 123);
+            drawArmy(i * 30 - j * 10 + shake*5, j * 40 - 5 * j, 20 - 0.5 * j, 182, 190, 23);
         }
 
     glFlush();
@@ -289,7 +293,7 @@ void fullArmy() {
 }
 
 
-//Deser Army
+//desert Army
 
 void desertArmy() {
 
@@ -322,18 +326,18 @@ void desertArmy() {
     //sun
 
     glColor3f(1.0, 0.3, 0.0);
-    circle_a(426.67, 370.0, 70.0);
+    circle(426.67, 370.0, 70.0);
 
     //clouds
 
     glColor3f(1.0, 1.0, 1.0);
-    cloud_a(800, 600, 30, -counter);
+    cloud(800, 600, 30, -counter);
     glColor3f(1.0, 1.0, 1.0);
-    cloud_a(100, 680, 30, counter);
+    cloud(100, 680, 30, counter);
 
     // mountains
     glColor3f(0.7, 0.3, 0.0);
-    circle_a(213.33, 491.5, 29.5);
+    circle(213.33, 491.5, 29.5);
     glColor3f(0.7, 0.3, 0.0);
     glBegin(GL_POLYGON);
     glVertex2f(0, 300);
@@ -343,7 +347,7 @@ void desertArmy() {
     glEnd();
 
     glColor3f(0.7, 0.3, 0.0);
-    circle_a(640.0, 491.5, 29.5);
+    circle(640.0, 491.5, 29.5);
     glBegin(GL_POLYGON);
     glVertex2f(426.67, 300);
     glVertex2f(610, 500);
@@ -366,7 +370,7 @@ void desertArmy() {
     glEnd();
 
     glColor3f(0.7, 0.3, 0.0);
-    circle_a(1066.66, 491.5, 29.5);
+    circle(1066.66, 491.5, 29.5);
     glBegin(GL_POLYGON);
     glVertex2f(853.33, 300);
     glVertex2f(1036.6, 500);
@@ -476,7 +480,14 @@ void update(int) {
 
     if (SCENE_ID == 2) {
        counter++;
+       
+       if(counter%10==0)
+        if(shake==1)
+            shake = -1;
+        else
+            shake =1;
     }
+   
 
     // Recalls the Display Function
     glutPostRedisplay();
